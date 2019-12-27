@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# 参考リンク
+# https://www.matsub.net/posts/2017/12/15/good-looking-cli
+
+# インポート
+import select_num_menu
+
+
+# =======================================================
+#【 数字選択メニュー関数】
+# @param $1 選択肢の配列
+#  
+# @return select_num_menu_res 処理結果
+# =======================================================
+
+# ブランチ一覧を配列で取得
+branches=`git branch`
+branchList=(`echo ${branches//"*"/}`)
+# echo $branches
+
+# カーソルメニュー
+select_num_menu "${branchList[*]}"
+selected=$select_num_menu_res
+
+git checkout $selected

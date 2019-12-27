@@ -1,0 +1,89 @@
+#!/bin/bash
+
+# 参考リンク
+# https://www.matsub.net/posts/2017/12/15/good-looking-cli
+
+
+# =======================================================
+#【 カーソルメニュー関数】
+# 引き数に配列をとる
+# 
+# 
+# 未完成
+# =======================================================
+function cursor_menu() {
+
+    # 選択している番号
+    local choice=0
+    local array=($1)
+    local array_size=${#array[@]}
+    local array_last_num=`expr ${#array[@]} - 1`
+
+    # 配列のサイズ分だけ、余白をとる
+    # for _ in $(seq 0 $array_last_num);do echo "";done
+    
+    while true
+    do
+        
+
+        # メニューを出力
+        for i in $(seq 0 $array_last_num);do
+
+            if [ $choice = $i ]
+            then # メニューが選択中なら
+                printf "> "
+                tput smul # アンダースコアあり
+
+            else # メニューが選択中でなければ
+                
+                 # アンダースコアなし
+                tput rmul
+                printf "  "
+            fi
+            
+            echo ${array[$i]}
+            wait
+        done
+        
+        tput cuu $array_size
+        wait
+        
+        # 一文字入力を読む
+        read -sn1 answer
+        # エスケープコードが打たれたら
+        if [ "$answer" = "[" ]; then # (^[はctrl+V ctrl+[とかで入力してね)
+            # 残りのエスケープコードを読む
+            read -sn2 answer
+            # アローキーなら^[[A, B, C, Dってなるよ
+        fi
+        case $answer in
+            "j"|"[[B")
+                # j, 下アローキーで下に移動（choice+1）
+                # choiceの最大値はメニュー配列の末尾番号なので超えないように
+                if [ $choice -lt $array_last_num ]; then choice=`expr $choice + 1`; fi
+                ;;
+            "k"|"[[A")
+                # k, 上アローキーで上に移動（choice-1）
+                # choiceの最小値は0なので超えないように
+                if [ $choice -gt 0 ]; then choice=`expr $choice - 1`; fi
+                ;;
+            "")
+                # 改行で決定
+                echo ${array[$choice]}
+                return
+                ;;
+        esac
+        
+    done
+
+}
+
+
+
+# ブランチ一覧を配列で取得
+branches=`git branch`
+branchList=(`echo ${branches//"*"/}`)
+
+
+# カーソルメニュー
+cursor_menu "${branchList[*]}"

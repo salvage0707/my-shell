@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# 参考リンク
+
+# インポート
+
+
+# =======================================================
+#【 選択形式のセレクトメニュー】
+#   @param $1 選択最小
+#   @param $2 選択最大
+# 
+#   @return read_select_num_res 処理結果
+#
+# [説明]
+#   標準入力で、数字を受け取る。
+#
+# [使い方]
+#   ```
+#   read_select_num_res 0 100
+#   ```
+# =======================================================
+
+function read_select_num() {
+
+    # --------------
+    # 変数
+    # --------------
+    local min=$1
+    local max=$2
+
+    # --------------
+    # 処理開始
+    # --------------
+
+    # 入力まち
+    while true 
+    do
+        read answer
+
+        # 数値チェック
+        expr "$answer" + 1 > /dev/null 2>&1
+        if [ $? -eq 2 ]; then continue ;fi
+        
+        # 数値範囲チェック
+        if [ $answer -lt $min ]; then continue ${target} ;fi
+        if [ $answer -gt $max ]; then continue ${target} ;fi
+        
+        break
+    done
+    
+    read_select_num_res="$answer"
+}

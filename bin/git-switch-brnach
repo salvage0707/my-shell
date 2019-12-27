@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# 参考リンク
+
+# インポート
+import select_num_menu
+
+
+# =======================================================
+#【 数字選択メニュー関数】
+#   @param $1 選択肢の配列
+#
+#   @return select_num_menu_res 処理結果
+#
+# [説明]
+#   選択肢から切り替えるブランチを選択し、`git checkout $branch`する。
+#
+# [使い方]
+#   リモートブランチも選択肢に入れる
+#   ```
+#   git-switch-branch -a
+#   ```
+# =======================================================
+
+# ブランチ一覧を配列で取得
+branches=`git branch $1`
+branchList=(`echo ${branches//"*"/}`)
+
+# カーソルメニュー
+select_num_menu "${branchList[*]}"
+selected=$select_num_menu_res
+
+# 選択されたブランチへ切り替える
+git checkout ${selected/remote/}
+
+# echo $?

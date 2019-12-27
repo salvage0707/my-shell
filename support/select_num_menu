@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# 参考リンク
+
+# インポート
+import read_select_num
+
+# =======================================================
+#【 数字選択メニュー関数】
+# @param $1 選択肢の配列
+#  
+# @return select_num_menu_res 処理結果
+# =======================================================
+function select_num_menu() {
+
+    # --------------
+	# 変数
+	# --------------
+    local array=($1)
+    local array_size=${#array[@]}
+    local array_last_num=`expr ${#array[@]} - 1`
+
+	# --------------
+	# 処理開始
+	# --------------
+
+    # メニューを出力
+    for i in $(seq 0 $array_last_num);do
+        echo "$i) ${array[$i]}"
+    done
+    
+    # 入力まち
+    read_select_num 0 $array_last_num
+    answer=$read_select_num_res
+    
+    select_num_menu_res=${array[$answer]}
+}
