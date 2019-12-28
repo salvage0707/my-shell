@@ -3,6 +3,7 @@
 # 参考リンク
 
 # インポート
+source $MY_SHELL_SUPPORT_PATH/import
 import select_num_menu
 
 
