@@ -1,8 +1,8 @@
-# ƒRƒ}ƒ“ƒhŒQ‚Ìƒ‹[ƒgƒpƒX
+# ã‚³ãƒžãƒ³ãƒ‰ç¾¤ã®ãƒ«ãƒ¼ãƒˆãƒ‘ã‚¹
 MY_SHELL_ROOT_PATH=~/work/shell
 
-# ƒ†[ƒU[‚ªŽg—p‚·‚éƒRƒ}ƒ“ƒh
+# ãƒ¦ãƒ¼ã‚¶ãƒ¼ãŒä½¿ç”¨ã™ã‚‹ã‚³ãƒžãƒ³ãƒ‰
 MY_SHELL_BIN_PATH=$MY_SHELL_ROOT_PATH/bin
 
-# ƒRƒ}ƒ“ƒh‚ðƒTƒ|[ƒg‚·‚éŠÖ”
+# ã‚³ãƒžãƒ³ãƒ‰ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹é–¢æ•°
 MY_SHELL_SUPPORT_PATH=$MY_SHELL_ROOT_PATH/support

@@ -1,5 +1,5 @@
-# �쐬�R�}���h�̃p�X��ʂ�
+# 作成コマンドのパスを通す
 export PATH=$PATH:$MY_SHELL_BIN_PATH
 
-# �G�C���A�X
+# エイリアス
 alias gc="git-switch-brnach $*"

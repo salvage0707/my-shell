@@ -1,21 +1,21 @@
 #!/bin/bash
 
-# QlƒŠƒ“ƒN
+# å‚è€ƒãƒªãƒ³ã‚¯
 
-# ƒCƒ“ƒ|[ƒg
+# ã‚¤ãƒ³ãƒãƒ¼ãƒˆ
 
 
 # =======================================================
-#y ‘I‘ğŒ`®‚ÌƒZƒŒƒNƒgƒƒjƒ…[z
-#   @param $1 ‘I‘ğÅ¬
-#   @param $2 ‘I‘ğÅ‘å
+#ã€ é¸æŠå½¢å¼ã®ã‚»ãƒ¬ã‚¯ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼ã€‘
+#   @param $1 é¸æŠæœ€å°
+#   @param $2 é¸æŠæœ€å¤§
 # 
-#   @return read_select_num_res ˆ—Œ‹‰Ê
+#   @return read_select_num_res å‡¦ç†çµæœ
 #
-# [à–¾]
-#   •W€“ü—Í‚ÅA”š‚ğó‚¯æ‚éB
+# [èª¬æ˜]
+#   æ¨™æº–å…¥åŠ›ã§ã€æ•°å­—ã‚’å—ã‘å–ã‚‹ã€‚
 #
-# [g‚¢•û]
+# [ä½¿ã„æ–¹]
 #   ```
 #   read_select_num_res 0 100
 #   ```
@@ -24,25 +24,25 @@
 function read_select_num() {
 
     # --------------
-    # •Ï”
+    # å¤‰æ•°
     # --------------
     local min=$1
     local max=$2
 
     # --------------
-    # ˆ—ŠJn
+    # å‡¦ç†é–‹å§‹
     # --------------
 
-    # “ü—Í‚Ü‚¿
+    # å…¥åŠ›ã¾ã¡
     while true 
     do
         read answer
 
-        # ”’lƒ`ƒFƒbƒN
+        # æ•°å€¤ãƒã‚§ãƒƒã‚¯
         expr "$answer" + 1 > /dev/null 2>&1
         if [ $? -eq 2 ]; then continue ;fi
         
-        # ”’l”ÍˆÍƒ`ƒFƒbƒN
+        # æ•°å€¤ç¯„å›²ãƒã‚§ãƒƒã‚¯
         if [ $answer -lt $min ]; then continue ${target} ;fi
         if [ $answer -gt $max ]; then continue ${target} ;fi
         

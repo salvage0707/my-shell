@@ -1,35 +1,35 @@
 #!/bin/bash
 
-# QlƒŠƒ“ƒN
+# å‚è€ƒãƒªãƒ³ã‚¯
 
-# ƒCƒ“ƒ|[ƒg
+# ã‚¤ãƒ³ãƒãƒ¼ãƒˆ
 import read_select_num
 
 # =======================================================
-#y ”š‘I‘ğƒƒjƒ…[ŠÖ”z
-# @param $1 ‘I‘ğˆ‚Ì”z—ñ
+#ã€ æ•°å­—é¸æŠãƒ¡ãƒ‹ãƒ¥ãƒ¼é–¢æ•°ã€‘
+# @param $1 é¸æŠè‚¢ã®é…åˆ—
 #  
-# @return select_num_menu_res ˆ—Œ‹‰Ê
+# @return select_num_menu_res å‡¦ç†çµæœ
 # =======================================================
 function select_num_menu() {
 
     # --------------
-	# •Ï”
+	# å¤‰æ•°
 	# --------------
     local array=($1)
     local array_size=${#array[@]}
     local array_last_num=`expr ${#array[@]} - 1`
 
 	# --------------
-	# ˆ—ŠJn
+	# å‡¦ç†é–‹å§‹
 	# --------------
 
-    # ƒƒjƒ…[‚ğo—Í
+    # ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’å‡ºåŠ›
     for i in $(seq 0 $array_last_num);do
         echo "$i) ${array[$i]}"
     done
     
-    # “ü—Í‚Ü‚¿
+    # å…¥åŠ›ã¾ã¡
     read_select_num 0 $array_last_num
     answer=$read_select_num_res
     

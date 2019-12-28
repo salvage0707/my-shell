@@ -1,42 +1,42 @@
 #!/bin/bash
 
-# �Q�l�����N
+# 参考リンク
 # https://www.matsub.net/posts/2017/12/15/good-looking-cli
 
 
 # =======================================================
-#�y �J�[�\�����j���[�֐��z
-# �������ɔz����Ƃ�
+#【 カーソルメニュー関数】
+# 引き数に配列をとる
 # 
 # 
-# ������
+# 未完成
 # =======================================================
 function cursor_menu() {
 
-    # �I�����Ă���ԍ�
+    # 選択している番号
     local choice=0
     local array=($1)
     local array_size=${#array[@]}
     local array_last_num=`expr ${#array[@]} - 1`
 
-    # �z��̃T�C�Y�������A�]�����Ƃ�
+    # 配列のサイズ分だけ、余白をとる
     # for _ in $(seq 0 $array_last_num);do echo "";done
     
     while true
     do
         
 
-        # ���j���[���o��
+        # メニューを出力
         for i in $(seq 0 $array_last_num);do
 
             if [ $choice = $i ]
-            then # ���j���[���I�𒆂Ȃ�
+            then # メニューが選択中なら
                 printf "> "
-                tput smul # �A���_�[�X�R�A����
+                tput smul # アンダースコアあり
 
-            else # ���j���[���I�𒆂łȂ����
+            else # メニューが選択中でなければ
                 
-                 # �A���_�[�X�R�A�Ȃ�
+                 # アンダースコアなし
                 tput rmul
                 printf "  "
             fi
@@ -48,27 +48,27 @@ function cursor_menu() {
         tput cuu $array_size
         wait
         
-        # �ꕶ�����͂�ǂ�
+        # 一文字入力を読む
         read -sn1 answer
-        # �G�X�P�[�v�R�[�h���ł��ꂽ��
-        if [ "$answer" = "[" ]; then # (^[��ctrl+V ctrl+[�Ƃ��œ��͂��Ă�)
-            # �c��̃G�X�P�[�v�R�[�h��ǂ�
+        # エスケープコードが打たれたら
+        if [ "$answer" = "[" ]; then # (^[はctrl+V ctrl+[とかで入力してね)
+            # 残りのエスケープコードを読む
             read -sn2 answer
-            # �A���[�L�[�Ȃ�^[[A, B, C, D���ĂȂ��
+            # アローキーなら^[[A, B, C, Dってなるよ
         fi
         case $answer in
             "j"|"[[B")
-                # j, ���A���[�L�[�ŉ��Ɉړ��ichoice+1�j
-                # choice�̍ő�l�̓��j���[�z��̖����ԍ��Ȃ̂Œ����Ȃ��悤��
+                # j, 下アローキーで下に移動（choice+1）
+                # choiceの最大値はメニュー配列の末尾番号なので超えないように
                 if [ $choice -lt $array_last_num ]; then choice=`expr $choice + 1`; fi
                 ;;
             "k"|"[[A")
-                # k, ��A���[�L�[�ŏ�Ɉړ��ichoice-1�j
-                # choice�̍ŏ��l��0�Ȃ̂Œ����Ȃ��悤��
+                # k, 上アローキーで上に移動（choice-1）
+                # choiceの最小値は0なので超えないように
                 if [ $choice -gt 0 ]; then choice=`expr $choice - 1`; fi
                 ;;
             "")
-                # ���s�Ō���
+                # 改行で決定
                 echo ${array[$choice]}
                 return
                 ;;
@@ -80,10 +80,10 @@ function cursor_menu() {
 
 
 
-# �u�����`�ꗗ��z��Ŏ擾
+# ブランチ一覧を配列で取得
 branches=`git branch`
 branchList=(`echo ${branches//"*"/}`)
 
 
-# �J�[�\�����j���[
+# カーソルメニュー
 cursor_menu "${branchList[*]}"
