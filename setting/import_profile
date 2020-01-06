@@ -1,8 +1,0 @@
-# コマンド群のルートパス
-export MY_SHELL_ROOT_PATH=~/work/shell
-
-# ユーザーが使用するコマンド
-export MY_SHELL_BIN_PATH=$MY_SHELL_ROOT_PATH/bin
-
-# コマンドをサポートする関数
-export MY_SHELL_SUPPORT_PATH=$MY_SHELL_ROOT_PATH/support

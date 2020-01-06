@@ -1,5 +1,7 @@
+# bashログイン時に毎回実行される
+
 # 作成コマンドのパスを通す
-export PATH=$PATH:$MY_SHELL_BIN_PATH
+export PATH="$PATH:$MY_SHELL_ROOT_PATH/bin"
 
 # エイリアス
 alias gc="git-switch-brnach $*"

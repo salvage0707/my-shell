@@ -17,6 +17,8 @@
 #   ```
 # =======================================================
 
+source $MY_SHELL_ROOT_PATH/setting/profile
+
 function import() {
-	source $MY_SHELL_SUPPORT_PATH/$1
+	source $MY_SHELL_ROOT_PATH/support/$1
 }

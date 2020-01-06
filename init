@@ -1,2 +1,14 @@
-echo "test -f ~/work/shell/setting/import_profile && . ~/work/shell/setting/import_profile" >> ~/.profile
-echo "test -f ~/work/shell/setting/import_bashrc && . ~/work/shell/setting/import_bashrc" >> ~/.bashrc
+# 赤字
+tput setaf 1 
+echo "init settings"
+
+# このファイル(init)があるpathを指定する
+# cloneしたディレクトリが異なる場合はここを修正
+echo "export MY_SHELL_ROOT_PATH=~/work/shell" >> ~/.bashrc
+echo "test -f $MY_SHELL_ROOT_PATH/setting/import_bashrc && source $MY_SHELL_ROOT_PATH/setting/import_bashrc" >> ~/.bashrc
+
+echo "end settings"
+echo "Please log in again!!!!!"
+
+# 白字
+tput setaf 7

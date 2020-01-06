@@ -1,10 +1,14 @@
 # ユーザー設定
 
+① コマンドの実行
 ```console
 $ cd ~
 $ mkdir work
 $ cd work
 $ git clone shell
-$ echo "test -f ~/work/shell/setting/import_profile && . ~/work/shell/setting/import_profile" >> ~/.profile
-$ echo "test -f ~/work/shell/setting/import_bashrc && . ~/work/shell/setting/import_bashrc" >> ~/.bashrc
+$ chmod -R 777 shell
+$ cd shell
+$ bash init
 ```
+
+② bashに再ログインし、設定を反映する
