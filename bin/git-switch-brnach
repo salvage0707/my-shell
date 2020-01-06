@@ -32,5 +32,3 @@ selected=$select_num_menu_res
 
 # 選択されたブランチへ切り替える
 git checkout ${selected/remote/}
-
-# echo $?
