@@ -3,7 +3,8 @@
 # 参考リンク
 
 # インポート
-
+source $MY_SHELL_ROOT_PATH/setting/import
+import some_function
 
 # =======================================================
 #【 選択形式のセレクトメニュー】

@@ -3,9 +3,9 @@
 # 参考リンク
 
 # インポート
-source $MY_SHELL_SUPPORT_PATH/import
+source $MY_SHELL_ROOT_PATH/setting/import
 import select_num_menu
-
+import is_gitproject
 
 # =======================================================
 #【 数字選択メニュー関数】
