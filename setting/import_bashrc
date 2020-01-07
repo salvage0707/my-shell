@@ -4,4 +4,4 @@
 export PATH="$PATH:$MY_SHELL_ROOT_PATH/bin"
 
 # エイリアス
-alias gc="git-switch-brnach $*"
+alias gc="git-switch-branch $*"
