@@ -7,17 +7,16 @@ source $MY_SHELL_ROOT_PATH/setting/import
 
 # =======================================================
 #【 選択形式のセレクトメニュー】
-#   @param $1 選択最小
-#   @param $2 選択最大
 # 
-#   @return read_select_num_res 処理結果
+#   @return current_branch_res 現在のブランチ名
 #
 # [説明]
-#   標準入力で、数字を受け取る。
+#   現在のブランチ名を返却する
 #
 # [使い方]
 #   ```
-#   read_select_num_res 0 100
+#   current_branch
+#   echo $current_branch_res
 #   ```
 # =======================================================
 
@@ -29,17 +28,7 @@ function usage() {
 
 function current_branch() {
 
-    # ブランチ一覧を配列で取得
-    branches=`git branch $1`
-    # branch=`echo "$branches" | grep "*"`
-    # git checkout ${branch/"*"/}
-
-    for branch in "$branches"; do
-        if [ "`echo $branch | grep "*"`" ]; then 
-            echo 'FOUND!!!'
-        fi
-        # echo `${branch/"*"/}`
-        # echo $branch
-    done
-
+    branch=`git branch | grep "*"`
+    current=${branch/"* "/}
+    current_branch_res=$current
 }
