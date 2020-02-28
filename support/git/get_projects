@@ -4,6 +4,7 @@
 
 # インポート
 source $MY_SHELL_ROOT_PATH/setting/import
+import git/is_management_project
 
 # =======================================================
 #【 直下ディレクトリのGitプロジェクト取得 】
@@ -30,8 +31,11 @@ function get_projects() {
 	dirs=`ls -d */`
 	
 	for dir in $dirs; do
-		# gitプロジェクトの場合にステータス表示
-		if [ -d $dir".git" ]; then
+		
+		# 管理対象か確認
+		is_management_project $dir
+		
+		if [ "$is_management_project_res" == "true" ] && [ -d $dir".git" ]; then
 			get_projects_res=("${get_projects_res[@]}" $dir)
 		fi
 	done

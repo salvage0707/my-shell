@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# 参考リンク
+
+# インポート
+source $MY_SHELL_ROOT_PATH/setting/import
+
+# =======================================================
+#【 直下ディレクトリのGitプロジェクト取得 】
+# 
+#   @return get_projects_res プロジェクトのディレクトリ名配列
+#
+# [説明]
+#   直下ディレクトリのGitプロジェクト取得
+#
+# [使い方]
+#   ```
+#   is_management_project_res
+#   test $is_management_project_res == true
+#   ```
+# =======================================================
+
+
+
+function is_management_project() {
+
+	local project=$1
+	local no_management=("$GIT_NO_MANAGEMENT_PROJECT")
+
+	if ! `echo ${no_management[@]} | grep -q "${project/"/"/}"` ; then
+		is_management_project_res=true
+	else
+		is_management_project_res=false
+	fi
+}
