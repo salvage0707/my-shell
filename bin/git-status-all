@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# 参考リンク
+
+# インポート
+source $MY_SHELL_ROOT_PATH/setting/import
+import print_text
+
+# =======================================================
+#【 選択形式のセレクトメニュー】
+# 
+#   @return なし
+#
+# [説明]
+#   直下ディレクトリのGitプロジェクトのステータスを簡易表示
+#
+# [使い方]
+#   ```
+#   git-status-all
+#   ```
+# =======================================================
+
+# 現在ディレクトリ直下のディレクトリを取得
+dirs=`ls -d */`
+
+for dir in $dirs;do
+	# gitプロジェクトの場合にステータス表示
+	if [ -d $dir".git" ]; then
+		info $dir
+		git -C $dir status -sb
+		new_line
+	fi
+done

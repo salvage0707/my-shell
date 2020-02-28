@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# 参考リンク
+
+# インポート
+source $MY_SHELL_ROOT_PATH/setting/import
+
+# =======================================================
+#【 直下ディレクトリのGitプロジェクト取得 】
+# 
+#   @return get_projects_res プロジェクトのディレクトリ名配列
+#
+# [説明]
+#   直下ディレクトリのGitプロジェクト取得
+#
+# [使い方]
+#   ```
+#   get_projects
+#   echo ${get_projects_res[@]}
+#   echo ${get_projects_res[*]}
+#   ```
+# =======================================================
+
+function get_projects() {
+	
+	# 結果変数
+	get_projects_res=()
+	
+	# 処理
+	dirs=`ls -d */`
+	
+	for dir in $dirs; do
+		# gitプロジェクトの場合にステータス表示
+		if [ -d $dir".git" ]; then
+			get_projects_res=("${get_projects_res[@]}" $dir)
+		fi
+	done
+}

@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# 参考リンク
+
+# インポート
+source $MY_SHELL_ROOT_PATH/setting/import
+
+# =======================================================
+#【 選択形式のセレクトメニュー】
+#   @param $1 表示テキスト
+# 
+#   @return なし
+#
+# [説明]
+#   テキストデコレーションした文字列を標準出力する。
+#   見本を出力するスクリプト
+#   ```
+#   for fore in `seq 30 37`; do printf "\e[${fore}m \\\e[${fore}m \e[m\n"; for mode in 1 4 5; do printf "\e[${fore};${mode}m \\\e[${fore};${mode}m \e[m"; for back in `seq 40 47`; do printf "\e[${fore};${back};${mode}m \\\e[${fore};${back};${mode}m \e[m"; done; echo; done; echo; done; printf " \\\e[m\n"
+#   ```
+#
+# [使い方]
+#   ```
+#   error "first text"
+#   info "first text"
+#   ```
+# =======================================================
+
+# 改行
+function new_line() {
+	echo ""
+}
+
+
+# =======================================================
+# 情報表示
+# =======================================================
+
+# 赤背景、白文字で表示する
+function error() {
+	local message=$1
+	
+	printf "\e[37;41;5mERROR : $message\e[m\n"
+}
+
+# 水色背景、黒文字で表示する
+function info() {
+	local message=$1
+	
+	printf "\e[30;46;5mINFO  : $message\e[m\n"
+}
+
+
+# =======================================================
+# カラー文字
+# =======================================================
+# 赤背景、白文字で表示する
+function red() {
+	local message=$1
+	
+	printf "\e[37;41;5m$message\e[m\n"
+}

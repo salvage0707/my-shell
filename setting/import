@@ -20,6 +20,7 @@
 # 処理中にエラーが出た場合に処理を停止する
 set -e
 
+
 source $MY_SHELL_ROOT_PATH/setting/profile
 
 function import() {

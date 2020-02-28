@@ -4,6 +4,7 @@
 
 # インポート
 source $MY_SHELL_ROOT_PATH/setting/import
+import git/current_branch
 
 # =======================================================
 #【 現在のブランチをpush 】
@@ -21,17 +22,5 @@ source $MY_SHELL_ROOT_PATH/setting/import
 #   ```
 # =======================================================
 
-# ブランチ一覧を配列で取得
-branches=`git branch $1`
-# branch=`echo "$branches" | grep "*"`
-branchList=("`echo $branches`")
-# git checkout ${branch/"*"/}
-echo ${#branchList[*]}
-
-for branch in "${branchList[*]}"; do
-echo "$branch"
-    if [ "`echo $branch | grep "*"`" ]; then 
-        echo 'FOUND!!!'
-    fi
-    # echo `${branch/"*"/}`
-done
+current_branch
+git push origin $current_branch_res

@@ -1,0 +1,98 @@
+#!/bin/bash
+
+# 参考リンク
+
+# インポート
+source $MY_SHELL_ROOT_PATH/setting/import
+import git/get_projects
+import print_text
+
+# =======================================================
+#【 選択形式のセレクトメニュー】
+# 
+#   @return なし
+# 
+# [説明]
+#   直下ディレクトリのGitプロジェクトを最新に更新
+#
+# [使い方]
+#   ```
+#   read_select_num_res 0 100
+#   ```
+# =======================================================
+
+
+info "最新に更新します"
+info "対象プロジェクト一覧"
+get_projects
+echo ${get_projects_res[@]}
+
+
+info "ブランチ名を入力してください"
+	echo "  m              => master"
+	echo "  d              => develop"
+	echo "  [a-zA-Z0-1/_#] => 入力ブランチ"
+	echo "  no text        => 更新なし"
+	echo "  exit           => 処理を終了"
+	new_line
+
+# 変数
+target_projects=()
+target_branches=()
+
+for project in ${get_projects_res[@]}; do
+	info $project
+
+	# 入力受付
+	printf "ブランチ名: "
+	read answer
+	
+	branch=""
+	case $answer in
+        "m") branch="master"
+             ;;
+
+        "d") branch="develop"
+             ;;
+
+        "exit") error "処理を終了しました"
+                exit
+                ;;
+
+        [a-zA-Z0-1/_#]*) branch=$answer
+                         ;;
+
+        * ) echo "更新なし"
+            continue
+            ;;
+    esac
+    
+    # 最新化
+    target_projects=("${target_projects[@]}" $project)
+    target_branches=("${target_branches[@]}" $branch)
+done
+
+
+# 最終確認
+red "最新化しますか? (y/n): "
+read tmp
+if [ $tmp != "y" ]; then
+	error "処理を終了しました"
+	exit
+fi
+
+# 最新化
+array_last_num=`expr ${#target_projects[@]} - 1`
+for i in $(seq 0 ${array_last_num}); do
+    p=${target_projects[i]}
+    b=${target_branches[i]}
+    
+    info "-----------------------------------------"
+    echo "プロジェクト: "$p
+    echo "ブランチ: "$b
+    
+    git -C $p checkout $b
+    git -C $p pull origin $b
+    
+    new_line
+done
