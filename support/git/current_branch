@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# 参考リンク
+
+# インポート
+source $MY_SHELL_ROOT_PATH/setting/import
+
+# =======================================================
+#【 選択形式のセレクトメニュー】
+#   @param $1 選択最小
+#   @param $2 選択最大
+# 
+#   @return read_select_num_res 処理結果
+#
+# [説明]
+#   標準入力で、数字を受け取る。
+#
+# [使い方]
+#   ```
+#   read_select_num_res 0 100
+#   ```
+# =======================================================
+
+function usage() {
+    # 必要であればhelpをかく
+
+    exit
+}
+
+function current_branch() {
+
+    # ブランチ一覧を配列で取得
+    branches=`git branch $1`
+    # branch=`echo "$branches" | grep "*"`
+    # git checkout ${branch/"*"/}
+
+    for branch in "$branches"; do
+        if [ "`echo $branch | grep "*"`" ]; then 
+            echo 'FOUND!!!'
+        fi
+        # echo `${branch/"*"/}`
+        # echo $branch
+    done
+
+}

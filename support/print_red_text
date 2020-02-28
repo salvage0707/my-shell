@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# 参考リンク
+
+# インポート
+source $MY_SHELL_ROOT_PATH/setting/import
+import some_function
+
+# =======================================================
+#【 選択形式のセレクトメニュー】
+#   @param $1 選択最小
+#   @param $2 選択最大
+# 
+#   @return read_select_num_res 処理結果
+#
+# [説明]
+#   標準入力で、数字を受け取る。
+#   見本を出力するスクリプト
+#   ```
+#   for fore in `seq 30 37`; do printf "\e[${fore}m \\\e[${fore}m \e[m\n"; for mode in 1 4 5; do printf "\e[${fore};${mode}m \\\e[${fore};${mode}m \e[m"; for back in `seq 40 47`; do printf "\e[${fore};${back};${mode}m \\\e[${fore};${back};${mode}m \e[m"; done; echo; done; echo; done; printf " \\\e[m\n"
+#   ```
+#
+# [使い方]
+#   ```
+#   read_select_num_res 0 100
+#   ```
+# =======================================================
+
+function print() {
+    local text=$1
+    local text_color=1
+    local background_color=0
+
+    while getopts ad:h OPT
+    do
+        case $OPT in
+            a)  FLAG_A=1
+                ;;
+            d)  VALUE_D=$OPTARG
+                ;;
+            h)  usage_exit
+                ;;
+            \?) usage_exit
+                ;;
+        esac
+    done
+
+}
+
+function get_color() {
+    
+}
