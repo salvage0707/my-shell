@@ -1,1 +1,6 @@
 # コマンド実行時に設定する変数を設定する
+
+# Git関連
+
+# 管理対象外プロジェクト
+GIT_NO_MANAGEMENT_PROJECT="auth-infra protocol-soap-parts apbase-samples"
