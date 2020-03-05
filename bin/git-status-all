@@ -5,6 +5,7 @@
 # インポート
 source $MY_SHELL_ROOT_PATH/setting/import
 import print_text
+import git/get_projects
 
 # =======================================================
 #【 選択形式のセレクトメニュー】
@@ -21,13 +22,10 @@ import print_text
 # =======================================================
 
 # 現在ディレクトリ直下のディレクトリを取得
-dirs=`ls -d */`
+get_projects
 
-for dir in $dirs;do
-	# gitプロジェクトの場合にステータス表示
-	if [ -d $dir".git" ]; then
-		info $dir
-		git -C $dir status -sb
-		new_line
-	fi
+for project in ${get_projects_res[@]}; do
+	info $project
+	git -C $project status -sb
+	new_line
 done

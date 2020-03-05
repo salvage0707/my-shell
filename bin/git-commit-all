@@ -5,6 +5,7 @@
 # インポート
 source $MY_SHELL_ROOT_PATH/setting/import
 import git/get_projects
+import git/current_branch
 import print_text
 
 # =======================================================
@@ -27,49 +28,27 @@ info "対象プロジェクト一覧"
 get_projects
 echo ${get_projects_res[@]}
 
-info "ベースブランチ名を入力してください"
-	echo "  m              => master"
-	echo "  d              => develop"
-	echo "  [a-zA-Z0-9/_#] => 入力ブランチ"
-	echo "  no text        => 更新なし"
-	echo "  exit           => 処理を終了"
-	new_line
-
 # 変数
 target_projects=()
-base_branches=()
-issue_numbers=()
+current_branches=()
 
 # プレフィックス
-prefix="issues/"
-
-printf "サフィックス  : "
-read sufix
+printf "コメント  : "
+read comment
 
 for project in ${get_projects_res[@]}; do
 	info $project
 
 	# 入力受付
-	printf "ブランチ名: "
-	read answer_branch
+	printf "コミットしますか? (y/n): "
+	read do_commit
 	
-	branch=""
-	case $answer_branch in
-        "m") 
-            branch="master"
-            ;;
-
-        "d")
-            branch="develop"
-            ;;
+	case $do_commit in
+        "y") ;;
 
         "exit")
             error "処理を終了しました"
             exit
-            ;;
-
-        [a-zA-Z0-9/_#]*) 
-            branch=$answer_branch
             ;;
 
         * ) 
@@ -78,34 +57,20 @@ for project in ${get_projects_res[@]}; do
             ;;
     esac
 
-    # 入力受付
-    while true 
-    do
-        printf "issue番号: "
-        read answer_issue_num
-        
-        issue_num=""
-        case $answer_issue_num in
-            [0-9]*) 
-                issue_num=$answer_issue_num
-                break
-                ;;
-
-            * ) 
-                echo "再度入力してください"
-                continue
-                ;;
-        esac
-    done
+    cd $project
+    current_branch
+    branch=$current_branch_res
+    cd ..
     
     # 最新化
     target_projects=("${target_projects[@]}" $project)
-    base_branches=("${base_branches[@]}" $branch)
-    issue_numbers=("${issue_numbers[@]}" $issue_num)
+    current_branches=("${current_branches[@]}" $branch)
 done
 
 # 最終確認
 red "最新化しますか? (y/n): "
+echo $target_projects
+echo $current_branches
 read tmp
 if [ $tmp != "y" ]; then
 	error "処理を終了しました"
@@ -117,13 +82,18 @@ array_last_num=`expr ${#target_projects[@]} - 1`
 for index in $(seq 0 ${array_last_num}); do
 
     p=${target_projects[index]}
-    b=${base_branches[index]}
-    i=${issue_numbers[index]}
+    branch=${current_branches[index]}
+    echo $issue_num
+    issue_num=${branch/"issues/"//}
+    echo $issue_num
+    issue_num=${issue_num/"_*"//}
+    echo $issue_num
+    exit
 
     info "-----------------------------------------"
     echo "プロジェクト  : "$p
     echo "ベースブランチ: "$b
-    echo "issue番号    : "$i
+    echo "コメント    : "$comment
     
     git -C $p checkout $b
     git -C $p pull origin $b

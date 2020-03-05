@@ -1,20 +1,20 @@
 #!/bin/bash
 
-# QlƒŠƒ“ƒN
+# å‚è€ƒãƒªãƒ³ã‚¯
 
-# ƒCƒ“ƒ|[ƒg
+# ã‚¤ãƒ³ãƒãƒ¼ãƒˆ
 source $MY_SHELL_ROOT_PATH/setting/import
 import git/is_management_project
 
 # =======================================================
-#y ’¼‰ºƒfƒBƒŒƒNƒgƒŠ‚ÌGitƒvƒƒWƒFƒNƒgæ“¾ z
+#ã€ ç›´ä¸‹ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®Gitãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå–å¾— ã€‘
 # 
-#   @return get_projects_res ƒvƒƒWƒFƒNƒg‚ÌƒfƒBƒŒƒNƒgƒŠ–¼”z—ñ
+#   @return get_projects_res ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªåé…åˆ—
 #
-# [à–¾]
-#   ’¼‰ºƒfƒBƒŒƒNƒgƒŠ‚ÌGitƒvƒƒWƒFƒNƒgæ“¾
+# [èª¬æ˜]
+#   ç›´ä¸‹ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã®Gitãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå–å¾—
 #
-# [g‚¢•û]
+# [ä½¿ã„æ–¹]
 #   ```
 #   get_projects
 #   echo ${get_projects_res[@]}
@@ -24,15 +24,15 @@ import git/is_management_project
 
 function get_projects() {
 	
-	# Œ‹‰Ê•Ï”
+	# çµæœå¤‰æ•°
 	get_projects_res=()
 	
-	# ˆ—
+	# å‡¦ç†
 	dirs=`ls -d */`
 	
 	for dir in $dirs; do
 		
-		# ŠÇ—‘ÎÛ‚©Šm”F
+		# ç®¡ç†å¯¾è±¡ã‹ç¢ºèª
 		is_management_project $dir
 		
 		if [ "$is_management_project_res" == "true" ] && [ -d $dir".git" ]; then
