@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# 参考リンク
+
+# インポート
+source $MY_SHELL_ROOT_PATH/setting/import
+
+command=${1/"*"/}
+`bash git-$*`

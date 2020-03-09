@@ -1,7 +1,15 @@
+#!/bin/bash
 # bashログイン時に毎回実行される
 
 # 作成コマンドのパスを通す
-export PATH="$PATH:$MY_SHELL_ROOT_PATH/bin"
+export PATH="$PATH:$MY_SHELL_ROOT_PATH/commands"
+
+# 直下のディレクトリもインポート対象
+sub_dir=`ls -d $MY_SHELL_ROOT_PATH/commands/*/`
+for dir in ${sub_dir[*]}; do
+    export PATH="$PATH:$dir"
+    test -f $dir/init_import && source $dir/init_import
+done
 
 # エイリアス
 alias gc="git-switch-branch $*"

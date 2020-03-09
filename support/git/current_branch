@@ -29,6 +29,5 @@ function usage() {
 function current_branch() {
 
     branch=`git branch | grep "*"`
-    current=${branch/"* "/}
     current_branch_res=$current
 }

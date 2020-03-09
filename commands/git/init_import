@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# コマンド補完設定
+
+function _git_complete() {
+    local list=`ls $MY_SHELL_ROOT_PATH/commands/git/bin`
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    local prev=${COMP_WORDS[COMP_CWORD-1]}
+
+    COMPREPLY=(`compgen -W "${list//"*"/}" -- "${cur}"`)
+}
+
+complete -F _git_complete mg
