@@ -20,14 +20,13 @@ source $MY_SHELL_ROOT_PATH/setting/import
 #   ```
 # =======================================================
 
-function usage() {
-    # 必要であればhelpをかく
-
-    exit
-}
-
 function current_branch() {
+    if [ -n "$1" ]; then
+        local project="-C "$1
+    fi
 
     branch=`git branch | grep "*"`
+    branch=`git $project branch | grep "*"`
+    current=${branch/"* "/}
     current_branch_res=$current
 }
