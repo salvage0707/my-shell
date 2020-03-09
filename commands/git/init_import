@@ -1,10 +1,15 @@
 #!/bin/bash
 
 # =======================================================
+# 環境変数
+# =======================================================
+export MY_SHELL_ROOT_PATH_GIT="$MY_SHELL_ROOT_PATH/commands/git"
+
+# =======================================================
 # コマンド補完設定
 # =======================================================
 function _git_complete() {
-    local list=`ls $MY_SHELL_ROOT_PATH/commands/git/bin`
+    local list=`ls $MY_SHELL_ROOT_PATH_GIT/bin`
     local cur=${COMP_WORDS[COMP_CWORD]}
     local prev=${COMP_WORDS[COMP_CWORD-1]}
 
