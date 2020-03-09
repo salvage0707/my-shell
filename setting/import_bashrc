@@ -11,5 +11,3 @@ for dir in ${sub_dir[*]}; do
     test -f $dir/init_import && source $dir/init_import
 done
 
-# エイリアス
-alias gc="git-switch-branch $*"
