@@ -6,4 +6,5 @@
 source $MY_SHELL_ROOT_PATH/setting/import
 
 # 処理
-`bash $MY_SHELL_ROOT_PATH_GIT/bin/$*`
+# echo "bash $MY_SHELL_ROOT_PATH_GIT/bin/$*"
+bash $MY_SHELL_ROOT_PATH_GIT/bin/$*

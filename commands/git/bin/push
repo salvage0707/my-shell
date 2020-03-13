@@ -23,4 +23,4 @@ import git/current_branch
 # =======================================================
 
 current_branch
-git push origin $current_branch_res
+git push origin $* $current_branch_res
